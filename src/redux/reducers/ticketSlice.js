@@ -9,9 +9,15 @@ export const ticketSlice = createSlice({
     addTicket: (state, action) => {
       state.push(action.payload);
     },
+    removeTicket: (state, action) => {
+      // placeholder
+    },
+    editTicket: (state, action) => {
+      // placeholder
+    },
   },
 });
 
-export const { addTicket } = ticketSlice.actions;
+export const { addTicket, removeTicket, editTicket } = ticketSlice.actions;
 
 export default ticketSlice.reducer;

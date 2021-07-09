@@ -30,6 +30,7 @@ export default function TicketCreator() {
         description,
         priority,
         dateCreated: Date.now(),
+        resolved: false,
       })
     );
   };
