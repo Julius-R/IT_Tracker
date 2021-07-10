@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { toggleModal } from "../redux/reducers/modalSlice";
@@ -23,17 +24,17 @@ export default function TicketCreator() {
   };
 
   const createTicket = (category, description, priority) => {
-    dispatch(
-      addTicket({
-        id: uuidv4(),
-        category,
-        description,
-        priority,
-        dateCreated: Date.now(),
-        resolved: false,
-        additionalComments: null,
-      })
-    );
+    let ticket = {
+      id: uuidv4(),
+      category,
+      description,
+      priority,
+      dateCreated: Date.now(),
+      resolved: "false",
+      additionalComments: " ",
+    };
+    dispatch(addTicket(ticket));
+    Axios.post("http://localhost:3001/createTicket", ticket);
   };
   return (
     <Modal
