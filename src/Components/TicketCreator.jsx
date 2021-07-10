@@ -31,6 +31,7 @@ export default function TicketCreator() {
         priority,
         dateCreated: Date.now(),
         resolved: false,
+        additionalComments: null,
       })
     );
   };
