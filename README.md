@@ -21,6 +21,7 @@ This should install all the packages you need. I would like to note that I am us
 Also, the databas in use is postgres. I'm using [node-postgres](https://node-postgres.com/). You can completely omit that if you want to use this project with MongoDB.
 
 To run, simply do the following in two terminals.
+
 Terminal 1:
 
 ```bash
