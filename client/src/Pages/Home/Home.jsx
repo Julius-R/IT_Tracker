@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import Header from "./Components/Header.jsx";
-import TicketCreator from "./Components/TicketCreator.jsx";
-import TicketTable from "./Components/TicketTable.jsx";
-import { useSelector, useDispatch } from "react-redux";
-import { addTicket } from "./redux/reducers/ticketSlice";
+import { useDispatch } from "react-redux";
+
+import Header from "../../Components/Header.jsx";
+import TicketCreator from "../../Components/TicketCreator.jsx";
+import TicketTable from "./TicketTable.jsx";
+
+import { addTicket } from "../../redux/reducers/ticketSlice";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -17,7 +19,7 @@ export default function App() {
   }, []);
   return (
     <>
-      <Header />
+      <Header showButton="true" />
       <TicketCreator />
       <TicketTable />
     </>

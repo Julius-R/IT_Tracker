@@ -7,7 +7,7 @@ export default function Ticket({ ticket }) {
       <td>{ticket.category}</td>
       <td>{ticket.description}</td>
       <td>{ticket.priority}</td>
-      <td>{new Date(ticket.dateCreated).toLocaleString()}</td>
+      <td>{new Date(parseInt(ticket.datecreated)).toLocaleString()}</td>
     </tr>
   );
 }

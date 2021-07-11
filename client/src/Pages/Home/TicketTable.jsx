@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Table from "react-bootstrap/Table";
 import Ticket from "./Ticket.jsx";
-import ticketSlice from "../redux/reducers/ticketSlice.js";
 
 export default function TicketTable() {
   const tickets = useSelector((state) => state.tickets);
