@@ -30,6 +30,29 @@ app.get("/api", (req, res) => {
     });
 });
 
+app.get("/getTicket", (req, res) => {
+  console.log(req.body);
+  tickets_model
+    .getTicket(req.body)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.post("/updateTicket", (req, res) => {
+  tickets_model
+    .updateTicket(req.body)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
 app.post("/createTicket", (req, res) => {
   tickets_model
     .createTicket(req.body)

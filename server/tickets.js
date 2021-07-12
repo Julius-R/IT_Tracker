@@ -19,6 +19,40 @@ const getTickets = () => {
   });
 };
 
+const getTicket = (body) => {
+  return new Promise((resolve, rej) => {
+    pool.query("SELECT * FROM tickets WHERE id = $1", [body.id], (err, res) => {
+      if (err) {
+        rej(err);
+      }
+      resolve(res.rows);
+    });
+  });
+};
+
+const updateTicket = (body) => {
+  return new Promise((resolve, rej) => {
+    const {
+      id,
+      category,
+      description,
+      priority,
+      resolved,
+      additionalcomments,
+    } = body;
+    pool.query(
+      "UPDATE tickets SET category=$2,description=$3,priority=$4,resolved=$5,additionalcomments=$6 WHERE id = $1",
+      [id, category, description, priority, resolved, additionalcomments],
+      (err, res) => {
+        if (err) {
+          rej(err);
+        }
+        resolve(`Successfully added!`);
+      }
+    );
+  });
+};
+
 const createTicket = (body) => {
   return new Promise((resolve, rej) => {
     const {
@@ -28,7 +62,7 @@ const createTicket = (body) => {
       priority,
       dateCreated,
       resolved,
-      additionalComments,
+      additionalcomments,
     } = body;
     pool.query(
       "INSERT INTO tickets (id,category,description,priority,dateCreated,resolved,additionalcomments) VALUES ($1, $2, $3,$4,$5,$6,$7) ",
@@ -39,7 +73,7 @@ const createTicket = (body) => {
         priority,
         dateCreated,
         resolved,
-        additionalComments,
+        additionalcomments,
       ],
       (err, res) => {
         if (err) {
@@ -53,5 +87,7 @@ const createTicket = (body) => {
 
 module.exports = {
   getTickets,
+  getTicket,
+  updateTicket,
   createTicket,
 };

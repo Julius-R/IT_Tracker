@@ -19,7 +19,7 @@ export default function App() {
   }, []);
   return (
     <>
-      <Header showButton="true" />
+      <Header showButton="false" />
       <TicketCreator />
       <TicketTable />
     </>
