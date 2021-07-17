@@ -31,7 +31,6 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/getTicket/:id", (req, res) => {
-  console.log(req.params.id);
   tickets_model
     .getTicket(req.params.id)
     .then((response) => {
