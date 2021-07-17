@@ -21,28 +21,22 @@ const getTickets = () => {
 
 const getTicket = (body) => {
   return new Promise((resolve, rej) => {
-    pool.query("SELECT * FROM tickets WHERE id = $1", [body.id], (err, res) => {
+    console.log("Body: " + body);
+    pool.query("SELECT * FROM tickets WHERE id = $1", [body], (err, res) => {
       if (err) {
         rej(err);
       }
-      resolve(res.rows);
+      resolve(res.rows[0]);
     });
   });
 };
 
 const updateTicket = (body) => {
   return new Promise((resolve, rej) => {
-    const {
-      id,
-      category,
-      description,
-      priority,
-      resolved,
-      additionalcomments,
-    } = body;
+    const { id, resolved, additionalcomments } = body;
     pool.query(
-      "UPDATE tickets SET category=$2,description=$3,priority=$4,resolved=$5,additionalcomments=$6 WHERE id = $1",
-      [id, category, description, priority, resolved, additionalcomments],
+      "UPDATE tickets SET resolved=$2,additionalcomments=$3 WHERE id = $1",
+      [id, resolved, additionalcomments],
       (err, res) => {
         if (err) {
           rej(err);

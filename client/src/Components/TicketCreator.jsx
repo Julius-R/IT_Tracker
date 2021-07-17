@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Axios from "axios";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { toggleModal } from "../redux/reducers/modalSlice";
@@ -7,6 +7,7 @@ import { addTicket } from "../redux/reducers/ticketSlice";
 import { Modal, Button, Form, Container } from "react-bootstrap";
 
 export default function TicketCreator() {
+  const [isLoading, setLoading] = useState(false);
   const showModal = useSelector((state) => state.modalActive.isActive);
   const dispatch = useDispatch();
 
@@ -19,7 +20,6 @@ export default function TicketCreator() {
       alert("Please do not leave this field empty");
     } else {
       createTicket(category.value, description.value, priority.value);
-      dispatch(toggleModal());
     }
   };
 
@@ -34,7 +34,10 @@ export default function TicketCreator() {
       additionalComments: " ",
     };
     dispatch(addTicket(ticket));
-    Axios.post("http://localhost:3001/createTicket", ticket);
+    axios.post("http://localhost:3001/createTicket", ticket).then(() => {
+      setLoading(false);
+      dispatch(toggleModal());
+    });
   };
   return (
     <Modal
@@ -69,8 +72,14 @@ export default function TicketCreator() {
               <option>High</option>
             </Form.Control>
           </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={isLoading}
+            onClick={() => {
+              setLoading(true);
+            }}>
+            {isLoading ? "Submiting..." : "Submit"}
           </Button>{" "}
           <Button variant="danger" onClick={() => dispatch(toggleModal())}>
             Cancel

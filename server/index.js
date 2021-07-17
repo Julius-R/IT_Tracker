@@ -30,10 +30,10 @@ app.get("/api", (req, res) => {
     });
 });
 
-app.get("/getTicket", (req, res) => {
-  console.log(req.body);
+app.get("/getTicket/:id", (req, res) => {
+  console.log(req.params.id);
   tickets_model
-    .getTicket(req.body)
+    .getTicket(req.params.id)
     .then((response) => {
       res.status(200).send(response);
     })
