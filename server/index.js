@@ -1,16 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
+const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3001;
 
 const tickets_model = require("./tickets");
 
 const app = express();
-
-app.use(express.static(path.resolve(__dirname, "../client/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-});
 
 app.use(express.json());
 app.use(function (req, res, next) {
